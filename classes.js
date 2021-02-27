@@ -29,8 +29,20 @@
   Call your class Employee and receive all the data in the constructor in the order listed above.
 */
 
-//Code Here
+class Employee {
+  constructor(first_name, last_name, email, age) {
+    this.first_name = first_name;
+    this.last_name = last_name;
+    this.email = email;
+    this.age = age;
+  }
 
+  makeWidget() {
+    return `${this.first_name} ${this.last_name} Widget`;
+  }
+}
+
+//Code Here
 
 ////////// PROBLEM 2 //////////
 
@@ -46,9 +58,19 @@
 
   Call your new class Manager
 */
-
+class Manager extends Employee {
+  constructor(first_name, last_name, email, age) {
+    super(first_name, last_name, email, age);
+    this.reports = [];
+  }
+  hire(employ) {
+    this.reports.push(employ);
+  }
+  fire(index) {
+    this.reports.splice(index, 1);
+  }
+}
 //Code Here
-
 
 ////////// PROBLEM 3 //////////
 
@@ -71,9 +93,36 @@
   Call your new class ProgressiveManager
 */
 
+class ProgressiveManager extends Manager {
+  constructor(first_name, last_name, email, age) {
+    super(first_name, last_name, email, age);
+    this.title = 'Not a manager';
+    this.bonus = 0;
+  }
+  hire() {
+    super.hire();
+    let reportLength = this.reports.length;
+    if (reportLength === 0) {
+      this.title = 'Not a manager';
+    } else if (reportLength >= 1 && reportLength <= 3) {
+      this.title = 'Barely Manager';
+    } else if (reportLength >= 4 && reportLength <= 10) {
+      this.title = 'Mostly Manager';
+    } else if (reportLength >= 11 && reportLength <= 50) {
+      this.title = 'Manager';
+    } else if (reportLength >= 51 && reportLength <= 100) {
+      this.title = 'Manager Plus';
+    } else if (reportLength > 100) {
+      this.title = 'Bestest Manager';
+    }
+  }
+  fire() {
+    super.fire();
+    this.bonus += 100;
+  }
+}
+
 //Code Here
-
-
 
 ////////// PROBLEM 4 - Black Diamond //////////
 
@@ -100,4 +149,23 @@
 
 //Code Here
 
-
+class Machine {
+  constructor() {
+    this.widgets_made_count = 0;
+    this.wear_and_tear_count = 0;
+    this.needs_reboot = false;
+  }
+  makeWidgets(num) {
+    this.widgets_made_count += num;
+    this.wear_and_tear_count = Math.floor(this.widgets_made_count / 50);
+  }
+  fixMachine() {
+    this.needs_reboot = true;
+  }
+  reboot() {
+    return () => {
+      this.wear_and_tear_count -= 10;
+      this.needs_reboot = false;
+    };
+  }
+}
