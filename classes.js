@@ -99,25 +99,46 @@ class ProgressiveManager extends Manager {
     this.title = 'Not a manager';
     this.bonus = 0;
   }
-  hire() {
-    super.hire();
+  hire(employ) {
+    super.hire(employ);
     let reportLength = this.reports.length;
-    if (reportLength === 0) {
-      this.title = 'Not a manager';
-    } else if (reportLength >= 1 && reportLength <= 3) {
-      this.title = 'Barely Manager';
-    } else if (reportLength >= 4 && reportLength <= 10) {
-      this.title = 'Mostly Manager';
-    } else if (reportLength >= 11 && reportLength <= 50) {
-      this.title = 'Manager';
-    } else if (reportLength >= 51 && reportLength <= 100) {
-      this.title = 'Manager Plus';
-    } else if (reportLength > 100) {
-      this.title = 'Bestest Manager';
+
+    switch (true) {
+      case reportLength === 0:
+        this.title = 'Not a manager';
+        break;
+      case reportLength >= 1 && reportLength <= 3:
+        this.title = 'Barely Manager';
+        break;
+      case reportLength >= 4 && reportLength <= 10:
+        this.title = 'Mostly Manager';
+        break;
+      case reportLength >= 11 && reportLength <= 50:
+        this.title = 'Manager';
+        break;
+      case reportLength >= 51 && reportLength <= 100:
+        this.title = 'Manager Plus';
+        break;
+      case reportLength > 100:
+        this.title = 'Bestest Manager';
+        break;
     }
+    //   if (reportLength === 0) {
+    //     this.title = 'Not a manager';
+    //   } else if (reportLength >= 1 && reportLength <= 3) {
+    //     this.title = 'Barely Manager';
+    //   } else if (reportLength >= 4 && reportLength <= 10) {
+    //     this.title = 'Mostly Manager';
+    //   } else if (reportLength >= 11 && reportLength <= 50) {
+    //     this.title = 'Manager';
+    //   } else if (reportLength >= 51 && reportLength <= 100) {
+    //     this.title = 'Manager Plus';
+    //   } else if (reportLength > 100) {
+    //     this.title = 'Bestest Manager';
+    //   }
   }
-  fire() {
-    super.fire();
+  fire(index) {
+    super.fire(index);
     this.bonus += 100;
   }
 }
